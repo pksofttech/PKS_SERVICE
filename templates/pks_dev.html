@@ -1,0 +1,148 @@
+<!DOCTYPE html data-theme="dark">
+<html lang="en">
+
+<head>
+    {% include '_meta.html' %}
+</head>
+
+<body class="bg-base-100">
+    <!-- MAIN BODY -->
+    <div class="drawer lg:drawer-open ">
+        <input id="side-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="container relative flex flex-col px-2 mx-auto drawer-content">
+            {% include '_nav_bar.html' %}
+            <!-- Page content here -->
+            <div class="content_box">
+                <div class=" hero rounded-box" style="background-image: url(/static/image/background_001.jpg);">
+                    <div class="hero-overlay bg-opacity-60 rounded-box"></div>
+                    <div class="text-center hero-content text-neutral-content rounded-box">
+                        <div class="max-w-md">
+                            <div class="avatar">
+                                <div class="w-24 rounded-full ring ring-accent ring-offset-base-100 ring-offset-2 animate-spin">
+                                    <img src="/static/image/system.png" />
+                                </div>
+                            </div>
+                            <h1 class="mb-5 text-3xl font-bold">PKSOFTTECH.ORG</h1>
+                            <p class="mb-5">ซอฟต์แวร์เฮาส์ (Software House)</p>
+                            <p class="mb-5 text-xl animate-pulse">รับสร้างโปรแกรมเฉพาะงานตามความต้องการของคุณ</p>
+                            <div class="text-blue-600 loading loading-infinity loading-lg"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="flex-col hero-content lg:flex-row">
+                        <div>
+                            <p class="py-6">การพัฒนาโปรแกรมเฉพาะตามต้องการเป็นกระบวนการที่สำคัญและที่มีความสำคัญต่อธุรกิจและองค์กรในยุคปัจจุบัน
+                                โดยโปรแกรมเช่นนี้ถูกออกแบบมาเพื่อตอบสนองความต้องการที่เฉพาะเจาะจงของลูกค้าหรือธุรกิจที่ต้องการโซลูชันที่ทันสมัยและที่ทันเทคโนโลยีสุดล้ำ
+                                เพื่อช่วยให้งานดำเนินไปอย่างมีประสิทธิภาพและมีประสิทธิผลมากยิ่งขึ้น
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full p-2 border mockup-window bg-base-300">
+                    <div>ขั้นตอนในการพัฒนาโปรแกรมเฉพาะตามต้องการ</div>
+                    <div class="p-4">
+                        <p class="indent-4">วิเคราะห์ความต้องการ: การเริ่มต้นด้วยการวิเคราะห์และเข้าใจความต้องการของลูกค้าหรือธุรกิจ
+                            ซึ่งรวมถึงการสำรวจปัญหาและความต้องการที่ต้องการแก้ไขด้วยโปรแกรม เช่น
+                            การตั้งคำถามเพื่อเข้าใจว่าโปรแกรมควรมีฟีเจอร์อะไร และเป้าหมายการใช้งานคืออะไร</p>
+                        <p class="indent-4">
+                            การออกแบบโปรแกรม: การสร้างโครงสร้างและการออกแบบโปรแกรมเพื่อตอบสนองความต้องการของลูกค้า
+                            ซึ่งรวมถึงการเลือกเทคโนโลยีที่เหมาะสมและการกำหนดรายละเอียดการทำงานของโปรแกรม
+                        </p>
+                        <p class="indent-4">
+                            การพัฒนา: การเขียนโปรแกรมตามการออกแบบที่ได้กำหนดไว้ ในขั้นตอนนี้นักพัฒนาจะใช้ภาษาโปรแกรมต่าง ๆ เช่น Python, Java, JavaScript หรือ C++
+                            เพื่อสร้างโค้ดที่มีประสิทธิภาพและมีความเสถียร
+                        </p>
+                        <p class="indent-4">
+                            การทดสอบ: การทดสอบโปรแกรมเพื่อตรวจสอบความถูกต้องและประสิทธิภาพ รวมถึงการทดสอบการทำงานของโปรแกรมในสถานการณ์ต่าง ๆ
+                            เพื่อให้แน่ใจว่ามันทำงานได้ตามที่คาดหวัง
+                        </p>
+                        <p class="indent-4">
+                            การปรับปรุงแก้ไข: การรับข้อเสนอแนะและความคิดเห็นจากผู้ใช้งานหรือการทดสอบ เพื่อปรับปรุงแก้ไขปัญหาหรือเพิ่มความสามารถเพิ่มเติมให้กับโปรแกรม
+                        </p>
+                        <p class="indent-4">
+                            การนำเสนอและการให้บริการ: การนำเสนอโปรแกรมแก่ลูกค้าและการให้บริการหลังการขาย เพื่อให้ลูกค้าได้รับประโยชน์และสนุกกับการใช้งานโปรแกรม
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="collapse collapse-plus bg-base-200 ">
+                    <input type="radio" name="my-accordion-3" checked="checked" />
+                    <div class="text-xl font-medium collapse-title text-info">
+                        Demo
+                    </div>
+                    <div class="collapse-content">
+                        <div class="flex flex-wrap justify-around gap-4 p-4 bg-base-200 rounded-btn">
+                            <div class="p-2 border mockup-browser bg-base-300">
+                                <div class="mockup-browser-toolbar">
+                                    <div class="input">https://pks.pksofttech.org</div>
+                                </div>
+                                <img class="w-full rounded-lg" src="/static/image/demo/app/bas002.png" />
+                                <p class="">Web Application</p>
+                            </div>
+                            <div class="p-2 border mockup-browser bg-base-300">
+                                <div class="mockup-browser-toolbar">
+                                    <div class="input">https://pks.pksofttech.org</div>
+                                </div>
+                                <img class="w-full rounded-lg" src="/static/image/demo/app/bas001.png" />
+                                <p class="">Web Application</p>
+                            </div>
+                            <div class="p-2 border mockup-browser bg-base-300">
+                                <div class="mockup-browser-toolbar">
+                                    <div class="input">https://pks.pksofttech.org</div>
+                                </div>
+                                <img class="w-full rounded-lg" src="/static/image/demo/app/vms.png" />
+                                <p class="">Web Application</p>
+                            </div>
+
+                            <div class="w-full p-2 border mockup-window bg-base-300">
+                                <div class="flex justify-center bg-base-200">
+                                    <video role="link" class="w-full rounded-lg" controls="controls" poster="/static/image/demo/qpks_screen.png">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <a target="_blank" href="https://youtu.be/GEOnSCkO890" class="link link-primary"> QPKS@Advertising</a>
+                            </div>
+                            <div class="p-2 border mockup-browser bg-base-300">
+                                <div class="mockup-browser-toolbar">
+                                    <div class="input">https://pks.pksofttech.org</div>
+                                </div>
+                                <img class="w-full rounded-lg" src="/static/image/demo/pks_parking/home_page.png" />
+                                <p class="">Web Application</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="collapse collapse-plus bg-base-200 ">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="text-xl font-medium collapse-title text-primary">
+                        License Infomation.
+                    </div>
+                    <div class="text-sm text-gray-500 collapse-content">
+                        <p>Docker Desktop license agreement</p>
+                        <p>Tailwind CSS v3.4 Dynamic viewport units, :has(), subgrid, and more</p>
+                        <p>daisyUI component library</p>
+                        <p>Building an admin dashboard has never been easier thanks to AdminLTE</p>
+                        <p>FastAPI framework, high performance, easy to learn, fast to code, ready for production</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        {% include '_side_menu_bar.html' %}
+    </div>
+
+    {% include '_footer.html' %}
+
+</body>
+
+{% include '_script.html' %}
+
+
+</html>

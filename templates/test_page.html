@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html data-theme="apptheme">
+
+<head>
+    {% include '_meta.html' %}
+
+</head>
+
+<body class="container mx-auto dark-mode">
+
+    <div class="flex flex-col gap-4 p-4">
+
+        <div class="flex flex-col justify-between gap-4 lg:flex-row">
+            <div class="info_box">
+                <div class=" info_icon bg-success">
+                    <i class="fa-solid fa-info-circle fa-2x"></i>
+                </div>
+                <div class="info_content">
+                    <span class="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                </div>
+            </div>
+
+            <div class="info_box bg-warning">
+                <div class=" info_icon">
+                    <i class="far fa-envelope fa-2x"></i>
+                </div>
+                <div class="info_content">
+                    <span class="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col justify-between gap-4 lg:flex-row">
+            <div class="info_box">
+                <div class="info_content">
+                    <span class="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                </div>
+
+                <div class="text-green-800 info_icon_end">
+                    <i class="fa-solid fa-info-circle fa-3x"></i>
+                </div>
+            </div>
+
+            <div class="info_box">
+                <div class=" info_icon bg-warning">
+                    <i class="far fa-envelope fa-2x"></i>
+                </div>
+                <div class="info_content">
+                    <span class="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+{% include '_script.html' %}
+
+<script>
+    function show_info(msg) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: "success",
+            title: "Successful",
+            html: msg,
+            timer: 1000,
+            showConfirmButton: false,
+        });
+    }
+    toastr["info"]("Test Page");
+</script>
+
+</html>

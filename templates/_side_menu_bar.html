@@ -1,0 +1,78 @@
+<div class="drawer-side">
+
+    <label for="side-drawer" class="drawer-overlay"></label>
+    <div class="w-64 min-h-screen p-4 overflow-auto shadow-md bg-base-300 rounded-r-box text-info">
+        <div class="flex justify-center p-4">
+            <div class="avatar online">
+                <div class="w-16 rounded-full ring-2">
+                    <img src="/static/image/system.png" />
+                </div>
+            </div>
+        </div>
+        <ul id="ul_menu" class="menu bg-base-200 rounded-box">
+            <li>
+                <a class="" href="/home">
+                    <i class="w-10 fa-solid fa-house fa-2x"></i>
+                    Home (หน้าหลัก)
+                    <!-- <span class="badge badge-sm">99+</span> -->
+                </a>
+            </li>
+
+            <li>
+                <a class="" href="/page?page=pks_dev">
+                    <i class="w-10 text-orange-600 fa-brands fa-ubuntu fa-2x"></i>
+                    Develop (พัฒนาโปรแกรมเฉพาะตามต้องการ)
+                </a>
+            </li>
+
+            <li>
+                <a class="" href="/page?page=qpks">
+                    <i class="w-10 text-blue-600 fa-brands fa-quinscape fa-2x"></i>
+                    QPKS (ระบบจัดการคิว)
+                    <!-- <span class="badge badge-sm">99+</span> -->
+                </a>
+            </li>
+
+            <li>
+                <a class="" href="/page?page=pks_parking">
+                    <i class="w-10 text-blue-600 fa-brands fa-quinscape fa-2x"></i>
+                    PKS-PARKING (ระบบจัดการลาดจอดรถ)
+                    <!-- <span class="badge badge-sm">99+</span> -->
+                </a>
+            </li>
+
+            <li>
+                <a class="" href="/page?page=pks_bas">
+                    <i class="w-10 text-blue-600 fa-brands fa-quinscape fa-2x"></i>
+                    Building Auto System (ระบบจัดการอาคาร)
+                    <!-- <span class="badge badge-sm">99+</span> -->
+                </a>
+            </li>
+
+            <li class="mt-8 ">
+                <button onclick="card_connect_dialog.showModal()" class="inline-flex justify-end text-success">
+                    <div class="badge-success">
+                        Connect Me...
+                    </div>
+                    <i class="w-10 fa-regular fa-address-card fa-2x text-info animate-bounce"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<dialog id="card_connect_dialog" class="modal">
+
+    <div class="p-8 card glass">
+        <form method="dialog">
+            <button class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
+        </form>
+        <h2 class="card-title">Line ID</h2>
+        <figure><img class="w-48 p-4" src="/static/image/75821.jpg" alt="QPKS" /></figure>
+        <div class="card-body">
+            <h2 class="card-title">081-1434939</h2>
+            <p>บรรณพต นุ่มนาค</p>
+        </div>
+    </div>
+
+</dialog>

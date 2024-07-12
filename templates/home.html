@@ -1,0 +1,263 @@
+<!DOCTYPE html data-theme="node">
+<html lang="en">
+
+<head>
+    {% include '_meta.html' %}
+</head>
+
+<body class=" bg-base-100">
+    <!-- MAIN BODY -->
+    <div class="drawer lg:drawer-open ">
+        <input id="side-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="container relative flex flex-col px-2 pb-16 mx-auto drawer-content">
+            {% include '_nav_bar.html' %}
+            <!-- Page content here -->
+            <div class=" content_box">
+
+                <div class=" hero rounded-box" style="background-image: url(/static/image/background.jpg);">
+                    <div class="hero-overlay bg-opacity-60 rounded-box"></div>
+                    <div class="text-center hero-content text-neutral-content rounded-box">
+                        <div class="max-w-md">
+                            <div class="avatar">
+                                <div class="w-24 rounded-full ring ring-accent ring-offset-base-100 ring-offset-2">
+                                    <img src="/static/image/logo_pks.png" />
+                                </div>
+                            </div>
+                            <h1 class="mb-5 text-3xl font-bold">PKSOFTTECH.ORG</h1>
+                            <p class="mb-5">ซอฟต์แวร์เฮาส์ (Software House)</p>
+                            <p class="mb-5 text-xl animate-pulse">รับสร้างโปรแกรมเฉพาะงานตามความต้องการของคุณ</p>
+                            <div class="text-blue-600 loading loading-infinity loading-lg"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="flex-col hero-content lg:flex-row">
+                        <div>
+                            <p class="py-6">ซอฟต์แวร์เฮาส์ (Software House) เป็นบริษัทหรือองค์กรที่เชี่ยวชาญในการพัฒนาซอฟต์แวร์และบริการเทคโนโลยีสารสนเทศ
+                                ซอฟต์แวร์เฮาส์ทำงานกับลูกค้าเพื่อสร้างและจัดส่งซอฟต์แวร์ที่ตรงตามความต้องการของลูกค้า
+                                ซอฟต์แวร์เฮาส์มักจะมีทีมนักพัฒนาซอฟต์แวร์ที่มีความเชี่ยวชาญในการเขียนโปรแกรมและออกแบบซอฟต์แวร์
+                                และสามารถให้คำแนะนำและบริการที่เกี่ยวข้องกับซอฟต์แวร์ต่าง ๆ รวมถึงการบริการด้านออกแบบและอิเล็กทรอนิกส์อื่น ๆ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 ">
+                    <div class="w-full p-2 border mockup-window bg-base-300">
+                        <div class="flex justify-center bg-base-200">
+                            <video class="w-full rounded-lg" controls="controls" poster="/static/image/demo/relay100ch.png">
+
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <p class="">PCB Design</p>
+                    </div>
+
+                    <div class="w-full p-2 border mockup-window bg-base-300">
+                        <div class="flex justify-center bg-base-200">
+                            <video role="link" class="w-full rounded-lg" controls="controls" poster="/static/image/demo/qpks_screen.png">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <a target="_blank" href="https://youtu.be/GEOnSCkO890" class="link link-primary"> QPKS@Advertising</a>
+                    </div>
+
+                    <div class="w-full p-2 border mockup-window bg-base-300">
+                        <img class="w-full rounded-lg" src="/static/image/demo/m_qpks.png" />
+                    </div>
+                    <div class="w-full p-2 border mockup-window bg-base-300">
+                        <img class="w-full rounded-lg" src="/static/image/demo/screen_dev001.png" />
+                        <p class="">Developer Program</p>
+                    </div>
+                    <div class="p-2 border mockup-browser bg-base-300">
+                        <div class="mockup-browser-toolbar">
+                            <div class="input">https://pksofttech.org</div>
+                        </div>
+                        <img class="w-full rounded-lg" src="/static/image/demo/web_app_demo.png" />
+                        <p class="">Web Application</p>
+                    </div>
+                    <div class="w-full p-2 border mockup-window bg-base-300">
+                        <img class="w-full rounded-lg" class="rounded-lg" src="/static/image/demo/laduino_app.png" />
+                        <p class="">Control Program</p>
+                    </div>
+
+
+                    <div class="border mockup-browser bg-base-300">
+                        <div class="mockup-browser-toolbar">
+                            <div class="input">https://qpks.com</div>
+                        </div>
+                        <img class="w-full rounded-lg" src="/static/image/demo/s_qpks.png" />
+                    </div>
+
+                    <div class="mockup-phone">
+                        <div class="camera"></div>
+
+                        <div class="artboard artboard-demo ">
+                            <div class="rounded ">
+                                <img src="/static/image/demo/qpks.png" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="collapse collapse-plus bg-base-200 ">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="text-xl font-medium collapse-title text-info">
+                        ข้อมูลระบบ
+                    </div>
+                    <div class="collapse-content">
+                        <div class="flex flex-wrap justify-around gap-4 p-4 bg-base-200 rounded-btn">
+                            <div class="inline-flex">
+                                <div class="info-box">
+                                    <span class="shadow info-box-icon bg-info"><i class="fas fa-cog"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">CPU</span>
+                                        <span class="info-box-number">
+                                            1-4
+                                            <small>Core</small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+                                <div class="info-box ">
+                                    <span class="shadow info-box-icon bg-success"><i class="fa-solid fa-memory"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Ram</span>
+                                        <span class="info-box-number">2-4 gb</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="inline-flex">
+                                <div class="info-box">
+                                    <span class="shadow info-box-icon bg-warning"><i class="fas fa-users"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Max Members</span>
+                                        <span class="info-box-number">1,000</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="inline-flex">
+                                <div class="info-box">
+                                    <span class="shadow info-box-icon bg-error"><i class="fa-solid fa-database"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Max Transaction</span>
+                                        <span class="info-box-number">500,000 Record</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap justify-around gap-4 p-4 bg-base-200 rounded-btn">
+                            <div class="inline-flex">
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>8</h3>
+                                        <p>LPR Devices</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3>2<sup style="font-size: 20px">Devices</sup></h3>
+                                        <p>Silp Dispenser</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <h3>*8</h3>
+                                        <p>Web Stamp(Option)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+                                <div class="small-box bg-error">
+                                    <div class="inner">
+                                        <h3>8</h3>
+                                        <p>Gate Control</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapse collapse-plus bg-base-200 ">
+                    <input type="radio" name="my-accordion-3" checked="checked" />
+                    <div class="text-xl font-medium collapse-title text-primary">
+                        License Infomation.
+                    </div>
+                    <div class="text-sm text-gray-500 collapse-content">
+                        <p>Docker Desktop license agreement</p>
+                        <p>Tailwind CSS v3.4 Dynamic viewport units, :has(), subgrid, and more</p>
+                        <p>daisyUI component library</p>
+                        <p>Building an admin dashboard has never been easier thanks to AdminLTE</p>
+                        <p>FastAPI framework, high performance, easy to learn, fast to code, ready for production</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% include '_side_menu_bar.html' %}
+    </div>
+
+    <dialog id="infoDialog" class="modal">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">Info</h3>
+            <p class="py-4">lpr demo ย้ายไปที่ </p>
+            <a class="link link-primary" href="https://lpr.pksofttech.org/">https://lpr.pksofttech.org/</a>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="modalWait" class="modal">
+        <div class="loader"></div>
+    </dialog>
+
+    <script>
+        modalWait.showModal();
+    </script>
+
+    {% include '_footer.html' %}
+    {% include '_script.html' %}
+</body>
+
+</html>

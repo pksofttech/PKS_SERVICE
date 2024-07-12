@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include '_meta.html' %}
+</head>
+
+<body>
+
+    <div class="drawer lg:drawer-open ">
+        <input id="side-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="relative flex flex-col px-2 drawer-content">
+            {% include '_nav_bar.html' %}
+            <!-- Page content here -->
+
+            <div class="grid grid-flow-row grid-cols-3 gap-2">
+                {% for l in services %}
+                <div class="rounded-lg card-compact bg-neutral text-neutral-content">
+                    <div class="items-center text-center card-body">
+                        <h2 class="card-title">{{l.Service.name}}
+                            <span><a role="button" class="hover:text-info" onclick="edit_service_name('{{l.Service.id}}','{{l.Service.name}}')">
+                                    <i class="fa-regular fa-pen-to-square"></i></a>
+                            </span>
+                        </h2>
+                        <p>{{l.Service.tag}}
+                            <span><a role="button" class="hover:text-info" onclick="edit_service_tag('{{l.Service.id}}','{{l.Service.tag}}')">
+                                    <i class="fa-regular fa-pen-to-square"></i></a>
+                            </span>
+                        </p>
+                        <div class="join">
+                            <p class="px-2">สีอักษร</p>
+                            <input type="color" class="rounded-lg" value="{{l.Service.fg_color}}" onchange="edit_service_fg_color('{{l.Service.id}}',this)" />
+                        </div>
+                        <div class="join">
+                            <p class="px-2">สีพื้นหลัง</p>
+                            <input type="color" class="rounded-lg" value="{{l.Service.bg_color}}" onchange="edit_service_bg_color('{{l.Service.id}}',this)" />
+                        </div>
+                        <div class="join">
+                            <p class="px-2">เปิการใช้งาน</p>
+                            <input type="checkbox" class="toggle toggle-warning" {% if l.Service.active %} checked {% endif %}
+                                onchange="edit_service_active('{{l.Service.id}}',this)" />
+                        </div>
+
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+            <button class="w-full mt-4 btn btn-outline btn-warning" onclick="edit_service_apply()">นำไปใช้งาน</button>
+        </div>
+
+        {% include '_side_menu_bar.html' %}
+    </div>
+
+    {% include '_footer.html' %}
+</body>
+{% include '_script.html' %}
+
+<script>
+    async function call_q(q_nqnme) {
+
+        //sound_get_card.play();
+        Swal.fire(
+            {
+                title: 'Test Call Service!',
+                text: q_nqnme,
+                icon: 'success',
+                timer: 3000,
+            }
+        )
+    }
+    function show_info(msg) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: "success",
+            title: "Successful",
+            html: msg,
+            timer: 1000,
+            showConfirmButton: false,
+        }).then(() => {
+
+        });
+    }
+    async function edit_service_name(id, name) {
+        const { value: services_name } = await Swal.fire({
+            title: 'แก้ไขชื่อบริการ',
+            input: 'text',
+            inputLabel: name,
+            inputPlaceholder: 'Enter new services name'
+        })
+
+        if (services_name) {
+            const formData = new FormData();
+            formData.append("id", id);
+            formData.append("name", services_name);
+
+            let _reply = await fetchApi("/api/service/", "post", formData, "json");
+            //debug(_reply);
+            if (!!_reply) {
+                if (_reply.success == true) {
+                    show_info(_reply.msg);
+                    window.location.reload();
+                } else {
+                    debug(_reply)
+                    toastMixin.fire({
+                        title: JSON.stringify(_reply),
+                        icon: "error",
+                    });
+                }
+            }
+        }
+    }
+
+    async function edit_service_tag(id, tag) {
+        const { value: services_tag } = await Swal.fire({
+            title: 'แก้ไขชื่อรายระเอียดบริการ',
+            input: 'text',
+            inputLabel: tag,
+            inputValue: tag,
+            inputPlaceholder: 'ถ้าไม่ต้องการให้ใส่เป็น - ค่ะ'
+        })
+
+        if (services_tag) {
+            const formData = new FormData();
+            formData.append("id", id);
+            formData.append("tag", services_tag);
+
+            let _reply = await fetchApi("/api/service/", "post", formData, "json");
+            //debug(_reply);
+            if (!!_reply) {
+                if (_reply.success == true) {
+                    show_info(_reply.msg);
+                    window.location.reload();
+                } else {
+                    debug(_reply)
+                    toastMixin.fire({
+                        title: JSON.stringify(_reply),
+                        icon: "error",
+                    });
+                }
+            }
+        }
+    }
+
+    async function edit_service_active(id, e) {
+
+        const formData = new FormData();
+        formData.append("id", id);
+        formData.append("active", e.checked);
+
+        let _reply = await fetchApi("/api/service/", "post", formData, "json");
+        //debug(_reply);
+        if (!!_reply) {
+            if (_reply.success == true) {
+                show_info(_reply.msg);
+            } else {
+                debug(_reply)
+                toastMixin.fire({
+                    title: JSON.stringify(_reply),
+                    icon: "error",
+                });
+            }
+        }
+    }
+
+    async function edit_service_bg_color(id, e) {
+
+        const formData = new FormData();
+        formData.append("id", id);
+        formData.append("bg_color", e.value);
+
+        let _reply = await fetchApi("/api/service/", "post", formData, "json");
+        //debug(_reply);
+        if (!!_reply) {
+            if (_reply.success == true) {
+                show_info(_reply.msg);
+            } else {
+                debug(_reply)
+                toastMixin.fire({
+                    title: JSON.stringify(_reply),
+                    icon: "error",
+                });
+            }
+        }
+    }
+
+    async function edit_service_fg_color(id, e) {
+
+        const formData = new FormData();
+        formData.append("id", id);
+        formData.append("fg_color", e.value);
+
+        let _reply = await fetchApi("/api/service/", "post", formData, "json");
+        //debug(_reply);
+        if (!!_reply) {
+            if (_reply.success == true) {
+                show_info(_reply.msg);
+            } else {
+                debug(_reply)
+                toastMixin.fire({
+                    title: JSON.stringify(_reply),
+                    icon: "error",
+                });
+            }
+        }
+    }
+    async function edit_service_apply() {
+
+        let _reply = await fetchApi("/api/service/service_apply", "get", null, "json");
+        //debug(_reply);
+        if (!!_reply) {
+            if (_reply.success == true) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Successful",
+                    html: _reply.msg,
+                    timer: 1000,
+                }).then(() => {
+                    //window.location.reload();
+                });
+            } else {
+                debug(_reply)
+                toastMixin.fire({
+                    title: JSON.stringify(_reply),
+                    icon: "error",
+                });
+            }
+        }
+    }
+
+
+
+</script>
+
+</html>

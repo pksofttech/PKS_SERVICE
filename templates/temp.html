@@ -1,0 +1,235 @@
+<section class="w-5/6">
+
+    <div class="card card-normal">
+        <div class="card-body">
+            <div class="flex flex-col gap-8 lg:flex-row">
+                <div class="flex flex-col gap-4">
+                    <div class="w-full">
+                        <img id="product_image_preview" src="/static/image/demo/qpks_screen.png" class="rounded-md ring-1">
+                    </div>
+                    <div class="flex flex-row justify-center gap-4 ">
+                        <div class="avatar">
+                            <div class="w-20 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/qpks_screen.png" alt="Product Image"></div>
+                        </div>
+
+                        <div class="avatar">
+                            <div class="w-20 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/m_qpks.png" alt="Product Image"></div>
+                        </div>
+
+                        <div class="avatar">
+                            <div class="w-20 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/background.jpg" alt="Product Image"></div>
+                        </div>
+                        <div class="avatar">
+                            <div class="w-20 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/background.jpg" alt="Product Image"></div>
+                        </div>
+                        <div class="avatar">
+                            <div class="w-20 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/background.jpg" alt="Product Image"></div>
+                        </div>
+                        <div class="avatar">
+                            <div class="w-20 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/background.jpg" alt="Product Image"></div>
+                        </div>
+                        <div class="avatar">
+                            <div class="w-20 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/background.jpg" alt="Product Image"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h1 class="text_success_h1">QPKS SYSTEM.</h1>
+                    <p class="indent-8">ระบบเรียกบริการคือระบบที่ใช้ในการจัดการและควบคุมการเรียกให้บริการหรือการรอคอยของลูกค้าหรือผู้ใช้บริการในสถานที่ต่าง ๆ เช่น
+                        โรงพยาบาล ห้างสรรพสินค้า
+                        ร้านอาหาร เป็นต้น เป้าหมายหลักของระบบเรียกบริการคือการลดระยะเวลารอคอยและเพิ่มประสิทธิภาพในการให้บริการแก่ลูกค้าหรือผู้ใช้งานโดยทั่วไป
+                    </p>
+                    <hr>
+
+                    <h4 class="text-center text_success_h2">Modal <small>ข้อมูลการรองรับอุปกรณ์</small></h4>
+                    <div id="product_select_box_01" class="justify-between grid-flow-row shadow-lg join text-primary">
+                        <button onclick="product_select(1)" class="join-item btn btn-success">
+                            <div class="flex flex-col">
+                                <div class="text-lg">Starter</div>
+                                จอเรียกคิว
+                            </div>
+                        </button>
+                        <button onclick="product_select(2)" class="join-item btn btn-ghost">
+                            <div class="flex flex-col">
+                                <div class="text-lg">General</div>
+                                <div>1P4C1M</div>
+                            </div>
+
+                        </button>
+                        <button onclick="product_select(3)" class="join-item btn btn-ghost">
+                            <div class="flex flex-col">
+                                <span class="text-lg">Business</span>
+                                xPxCxM
+
+                            </div>
+                        </button>
+                        <button onclick="product_select(4)" class="join-item btn btn-ghost">
+                            <div class="flex flex-col">
+                                <span class="text-lg">Development</span>
+                                ตามต้องการ
+
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="info_box bg-base-200">
+                        <div class="info_icon_full bg-info">
+                            <i class="fa-solid fa-tags fa-3x"></i>
+                        </div>
+                        <div class="info_content">
+                            <p class="text-accent">
+                                ฿xxx,xxx.00
+                            </p>
+                            <p class="text-warning">
+                                <small>Ex Tax: ฿xxx,xxx.00 </small>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-row justify-between">
+                        <a class="btn btn-primary btn-lg btn-outline">
+                            <i class="mr-2 fas fa-cart-plus fa-lg"></i>
+                            ติดต่อสอบถาม
+                        </a>
+                        <a href="/qpks_video" target="_blank" class="btn btn-success btn-lg btn-outline">
+                            <i class="fa-brands fa-youtube fa-lg"></i>
+                            Video review
+                        </a>
+                        <a href="/qpks_demo" target="_blank" class="btn btn-warning btn-lg btn-outline">
+                            <i class="fa-brands fa-quinscape fa-lg"></i>
+                            Demo (สาธิต)
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://www.facebook.com/profile.php?id=61551897294718" target="_blank" class="text-blue-500">
+                            <i class="fab fa-facebook-square fa-2x"></i>
+                        </a>
+
+                        <a href="#" class="text-green-500">
+                            <i class="fa-brands fa-line fa-2x"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UC8QUzWR86e1i5E9wJhyxa6A" target="_blank" class="text-red-500">
+                            <i class="fa-brands fa-youtube fa-2x"></i>
+                        </a>
+                        <a href="https://github.com/pksofttech" target="_blank" class="text-teal-900">
+                            <i class="fa-brands fa-github fa-2x"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 rounded-lg ring-2">
+                <div class="text-primary" id="product_tabContent">
+                    <div name="product_tabContent" class="block">Starter (จอเรียกคิว) เป็นระบบการเรียกรับบริการแบบกำหนดเอง การใช้งานออกแบบให้เรียบง่าย
+                        สามารถเรียกรับบริการได้ง่ายโดยการกดเรียกผ่าน key board ไร้สาย รองรับหลายภาษา เช่น ไทย English Chinese...
+                        <p class="p-4">
+                            <span class="badge badge-neutral">แสดงข้อมูล video:</span>
+                            ระบบจะแสดงข้อมูล Video สามารถปรับเปลื่ยนได้
+                        </p>
+                        <p class="p-4">
+                            <span class="badge badge-neutral">แสดงข้อมูลตัวหนังสือประชาสัมพันธ์:</span>
+                            ระบบจะแสดงข้อมูล โฆษณาประชาสัมพันธ์ สามารถปรับเปลื่ยนได้
+                        </p>
+                        <p class="p-4">
+                            <span class="badge badge-neutral">* สามารถปรับรูปแบบการแสดงผลตามต้องการ:</span>
+                            ระบบจะแสดงข้อมูล รูปแบบ สี ตาราง สามารถออกแบบได้ตามลูกค้าต้องการ (เป็นงานออกแบบเฉพาะราย)
+                        </p>
+
+                        <p class="p-4 text-sm text-warning">
+                            * รายการเพื่มเติมขอสงวนสิทธ์
+                        </p>
+                        <details>
+                            <summary class="float-right text-warning">รายละเอียดอุปกรณ์ระบบ</summary>
+                            <div class="info_box">
+                                <div class="info_icon ">
+                                    <i class="fa-solid fa-list-ul fa-3x"></i>
+                                </div>
+                                <div class="info_content">
+                                    <div class="stat-title">จอเรียกคิว ขนาด 32-55 ตามต้องการ</div>
+                                    <div class="stat-title">กล่อง TV Box พร้อมโปรแกรมระบบ QPKS(ระบบเรียกบริการ Starter)</div>
+                                    <div class="stat-title">Key board Numpad(ตัวเลข) ไร้สาย</div>
+                                </div>
+
+                            </div>
+                        </details>
+                    </div>
+                    <div name="product_tabContent" class="hidden"> Vivamus rhoncus nisl sed venenatis
+                        luctus. Sed condimentum risus ut tortor feugiat laoreet. Suspendisse potenti. Donec et finibus sem, ut commodo lectus. Cras eget neque
+                        dignissim, placerat orci interdum, venenatis odio. Nulla turpis elit, consequat eu eros ac, consectetur fringilla urna. Duis gravida ex
+                        pulvinar mauris ornare, eget porttitor enim vulputate. Mauris hendrerit, massa nec aliquam cursus, ex elit euismod lorem, vehicula rhoncus
+                        nisl dui sit amet eros. Nulla turpis lorem, dignissim a sapien eget, ultrices venenatis dolor. Curabitur vel turpis at magna elementum
+                        hendrerit vel id dui. Curabitur a ex ullamcorper, ornare velit vel, tincidunt ipsum. </div>
+                    <div name="product_tabContent" class="hidden"> Cras ut ipsum ornare, aliquam ipsum non,
+                        posuere elit. In hac habitasse platea dictumst. Aenean elementum leo augue, id fermentum risus efficitur vel. Nulla iaculis malesuada
+                        scelerisque. Praesent vel ipsum felis. Ut molestie, purus aliquam placerat sollicitudin, mi ligula euismod neque, non bibendum nibh neque et
+                        erat. Etiam dignissim aliquam ligula, aliquet feugiat nibh rhoncus ut. Aliquam efficitur lacinia lacinia. Morbi ac molestie lectus, vitae
+                        hendrerit nisl. Nullam metus odio, malesuada in vehicula at, consectetur nec justo. Quisque suscipit odio velit, at accumsan urna vestibulum
+                        a. Proin dictum, urna ut varius consectetur, sapien justo porta lectus, at mollis nisi orci et nulla. Donec pellentesque tortor vel nisl
+                        commodo ullamcorper. Donec varius massa at semper posuere. Integer finibus orci vitae vehicula placerat. </div>
+                </div>
+            </div>
+            <div class="p-4 border mockup-window ">
+                <p class="p-4">
+                    ระบบเรียกบริการสามารถมีลักษณะหลากหลายได้ตามความต้องการขององค์กรหรือสถานที่ใช้บริการ บางระบบอาจใช้หมายเลขประจำตัว (เช่น หมายเลขคิว)
+                    เพื่อแสดงลำดับคิวของผู้รอในแถว และบางระบบอาจมีการใช้เทคโนโลยีเพื่อแจ้งเตือนผู้รอเมื่อถึงคิวของตน เช่น
+                    การใช้ระบบเสียงเรียกหรือการส่งข้อความแจ้งเตือนผ่านแอปพลิเคชันบนโทรศัพท์มือถือ
+
+                    ระบบเรียกบริการส่วนใหญ่มีประโยชน์ต่อทั้งลูกค้าและผู้ให้บริการ โดยลูกค้าจะได้รับการบริการที่รวดเร็วและมีความเป็นระเบียบ
+                    ส่วนผู้ให้บริการสามารถจัดการลำดับคิวและทรัพยากรที่มีอยู่ให้เกิดประสิทธิภาพในการทำงาน
+
+                    ระบบเรียกบริการยังสามารถปรับใช้ในสถานการณ์ต่าง ๆ ได้ เช่น ในช่วงเวลารายการลดราคาหรือส่งเสริมการขาย การจัดกิจกรรมพิเศษ เป็นต้น
+                    เพื่อให้บริการที่มีความพึงพอใจแก่ลูกค้าอย่างต่อเนื่องและเพิ่มประสิทธิภาพในการจัดการลำดับคิวและการบริการโดยรวม
+                </p>
+                <p class="p-4 indent-4">
+                    ระบบเรียกบริการ Q (Queue Management System) คือระบบที่ใช้ในการจัดการและควบคุมคิวของลูกค้าหรือผู้รับบริการในสถานที่ต่าง ๆ เช่น โรงพยาบาล, ธนาคาร,
+                    สถานที่บริการราชการ, ห้างสรรพสินค้า, หรือสถานที่อื่น ๆ ที่มีคนต้องรอให้ได้รับบริการตามลำดับคิว ระบบ Q
+                    ช่วยในการจัดการคิวให้มีประสิทธิภาพและลดเวลารอรับบริการของลูกค้า โดยระบบนี้มักมีคุณสมบัติและฟังก์ชันพื้นฐานต่อไปนี้:
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">สร้างคิว:</span> ระบบ Q ช่วยลูกค้าสร้างคิวเพื่อรับบริการ โดยการเลือกบริการที่ต้องการและระบุข้อมูลพื้นฐาน เช่น
+                    ชื่อ,
+                    หมายเลขโทรศัพท์ เป็นต้น
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">แสดงข้อมูลคิว:</span>
+                    ระบบ Q จะแสดงข้อมูลเกี่ยวกับคิวที่อยู่ระหว่างรอ ในรูปแบบของหมายเลขคิว หรือรายชื่อลูกค้าที่กำลังรอ
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">ควบคุมการเรียกบริการ:</span>
+                    เจ้าหน้าที่หรือพนักงานสามารถใช้ระบบ Q เพื่อเรียกลูกค้าหรือผู้รับบริการเพื่อให้ได้บริการตามลำดับคิว
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">การแจ้งเตือน:</span>
+                    ระบบ Q สามารถส่งข้อมูลแจ้งเตือนผ่าน SMS, อีเมล, หรือแอพพลิเคชันโทรศัพท์มือถือเพื่อแจ้งให้ลูกค้าทราบเมื่อถึงคิวของพวกเขา
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">สถิติและรายงาน:</span>
+                    ระบบ Q สามารถเก็บข้อมูลเกี่ยวกับระยะเวลารอ, ประสิทธิภาพในการบริหารคิว และข้อมูลอื่น ๆ
+                    เพื่อให้เจ้าหน้าที่สามารถวิเคราะห์และปรับปรุงการบริหารคิวในอนาคต
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">การจัดคิวสมาร์ท:</span>
+                    บางระบบ Q สามารถใช้ข้อมูลเฉพาะเช่นเวลาที่คาดว่าบริการจะเสร็จสิ้น เพื่อจัดคิวให้มีประสิทธิภาพมากขึ้น
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">การจัดที่นั่ง:</span>
+                    ในบางกรณีที่บริการมีที่นั่งจำกัด เช่น โรงพยาบาล ระบบ Q อาจช่วยจัดที่นั่งให้ลูกค้าตามคิว
+                </p>
+                <p class="p-4">
+                    <span class="badge badge-neutral">การบริหารคิวออนไลน์:</span>
+                    บางระบบ Q อนุญาตให้ลูกค้าสร้างคิวและติดตามคิวออนไลน์ผ่านเว็บไซต์หรือแอพพลิเคชันมือถือ
+                </p>
+
+
+                <p>ระบบเรียกบริการ Q มีประโยชน์ในการปรับปรุงประสิทธิภาพในการบริหารคิวและลดเวลารอสำหรับลูกค้า
+                    นอกจากนี้ยังช่วยในการรวบรวมข้อมูลสถิติที่สามารถใช้ในการวิเคราะห์และการตัดสินใจในการปรับปรุงบริการในอนาคตด้วยความรวดเร็วและมีข้อมูลเป็นพื้นฐานในการตัดสินใจ.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>

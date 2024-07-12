@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html data-theme="apptheme">
+
+<head>
+    {% include '_meta.html' %}
+
+</head>
+
+<body>
+
+    <div class="drawer lg:drawer-open ">
+        <input id="side-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="container relative flex flex-col px-2 mx-auto drawer-content">
+            {% include '_nav_bar.html' %}
+            <div class="content_box">
+                <div class="flex flex-col">
+                    <h1 class="text-lg">PKS-PARKING AUTO MANAGEMENT</h1>
+                    <p class=" indent-8">
+                        ระบบอัตโนมัติ (Auto Management) โดยใช้เทคโนโลยี LPR (License Plate Recognition) หรือระบบจดจำแผ่นทะเบียนรถ (License Plate Recognition System)
+                        ซึ่งเป็นเทคโนโลยีที่ใช้ในการระบุและจดจำหมายเลขทะเบียนรถผ่านภาพถ่ายหรือวิดีโอ โดยมักใช้กับระบบการจัดการจราจร
+                        หรือในธุรกิจที่ต้องการการตรวจสอบและบันทึกข้อมูลเกี่ยวกับรถยนต์ที่ผ่านไปมาในพื้นที่หนึ่ง อาทิเช่น การจัดการที่จอดรถในสถานที่สาธารณะ
+                        การจัดการการเข้า-ออกของรถในบริษัท หรือการควบคุมการเข้า-ออกของยานพาหนะในพื้นที่จำกัด เป็นต้น การใช้ LPR AUTO MANAGEMENT
+                        ช่วยลดความผิดพลาดในการระบุและบันทึกข้อมูลรถ และเพิ่มความมั่นใจในการดำเนินงานต่างๆ ที่เกี่ยวข้องกับการจัดการยานพาหนะได้ดียิ่งขึ้น
+                    </p>
+                    <div class=" bg-base-200">
+                        <div class="text-xl font-medium collapse-title text-info">
+                            ข้อมูลระบบ
+                        </div>
+                        <div class="flex flex-wrap justify-around gap-4 p-4 bg-base-200 rounded-btn">
+                            <div class="inline-flex">
+                                <div class="info-box">
+                                    <span class="shadow info-box-icon bg-info"><i class="fas fa-cog"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">CPU</span>
+                                        <span class="info-box-number">
+                                            1-4
+                                            <small>Core</small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+                                <div class="info-box ">
+                                    <span class="shadow info-box-icon bg-success"><i class="fa-solid fa-memory"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Ram</span>
+                                        <span class="info-box-number">2-4 gb</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="inline-flex">
+                                <div class="info-box">
+                                    <span class="shadow info-box-icon bg-warning"><i class="fas fa-users"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Max Members</span>
+                                        <span class="info-box-number">1,000</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="inline-flex">
+                                <div class="info-box">
+                                    <span class="shadow info-box-icon bg-error"><i class="fa-solid fa-database"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Max Transaction</span>
+                                        <span class="info-box-number">500,000 Record</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap justify-around gap-4 p-4 bg-base-200 rounded-btn">
+                            <div class="inline-flex">
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <div class="text-lg">Gate Device</div>
+                                        <p>Card Reader Devices</p>
+                                        <p>QR CODE Devices</p>
+                                        <p>LPR Devices</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <div class="text-lg">Option Device</div>
+                                        <p>Card Dispenser</p>
+                                        <p>Silp Dispenser</p>
+                                        <p>Auto Reader Gate Out</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <div class="text-lg">Syatem Server</div>
+                                        <p>Local Server</p>
+                                        <p>On-Cloud</p>
+                                        <p>On-Premise</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="inline-flex">
+                                <div class="small-box bg-error">
+                                    <div class="inner">
+                                        <div class="text-lg">Service</div>
+                                        <p>Online</p>
+                                        <p>Remote</p>
+                                        <p>*On Site</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-2">
+                    <div class="flex flex-col justify-center gap-8 lg:flex-row">
+                        <div class="flex flex-col w-full gap-4">
+                            <figure class="mx-auto">
+                                <img id="product_image_preview" src="/static/image/demo/pks_parking/login_page.png" class="rounded-md ring-2 max-h-96">
+                            </figure>
+                            <div class="grid grid-cols-4 gap-2 mx-auto md:grid-cols-8 lg:grid-cols-10 ">
+                                <div class="avatar">
+                                    <div class="w-16 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/pks_parking/login_page.png"
+                                            alt="Product Image">
+                                    </div>
+                                </div>
+
+                                <div class="avatar">
+                                    <div class="w-16 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/pks_parking/home_page.png"
+                                            alt="Product Image">
+                                    </div>
+                                </div>
+
+                                <div class="avatar">
+                                    <div class="w-16 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/pks_parking/data01_page.png"
+                                            alt="Product Image">
+                                    </div>
+                                </div>
+                                <div class="avatar">
+                                    <div class="w-16 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/pks_parking/data02_page.png"
+                                            alt="Product Image">
+                                    </div>
+                                </div>
+                                <div class="avatar">
+                                    <div class="w-16 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/pks_parking/data03_page.png"
+                                            alt="Product Image">
+                                    </div>
+                                </div>
+                                <div class="avatar">
+                                    <div class="w-16 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/pks_parking/data04_page.png"
+                                            alt="Product Image">
+                                    </div>
+                                </div>
+                                <div class="avatar">
+                                    <div class="w-16 rounded-lg hover:ring-4"><img onclick="select_product_img(this)" src="/static/image/demo/pks_parking/data05_page.png"
+                                            alt="Product Image">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full gap-4">
+
+                            <div class="max-w-2xl p-4 overflow-auto rounded-lg h-96 ring-2 bg-base-200">
+                                <div class="py-4 text-primary" id="product_tabContent">
+                                    <div name="product_tabContent" class="block">การติดตั้งระบบเป็นแบบ Module Server Box โดยอุปกรณ์ในระบบเชื่อมต่อผ่านระบบ LAN
+                                        <p class="p-4">
+                                            <span class="">Server Box:</span>
+                                            Server Box คือ Server Program ที่ดำเนินการติดตั้งลงระบบสามารถเชื่อมต่อ อุปกรณ์ตั้งค่าทำงาน
+                                        </p>
+                                        <p class="p-4">
+                                            <span class="">อุปกรณ์เครื่อข่ายระบบ LAN:</span>
+                                            อาจเป็นอุปกรณ์เดิมหรือติดตั้งไหม่กรณีไม่มี ระบบ LAN
+                                        </p>
+                                        <p class="p-4">
+                                            <span class="">* อุปกรณ์ระบบ Device:</span>
+                                            ระบบอ่านบัตร ระบบควบคุมไมเกั้น เดรื่องทำรายการ(POS)
+                                        </p>
+
+                                        <p class="p-4 text-sm text-warning">
+                                            * รายการเพื่มเติมขอสงวนสิทธ์
+                                        </p>
+
+                                    </div>
+                                    <div name="product_tabContent" class="hidden">
+                                        เป็นระบบ Server ดำเนินการติดตั้งลงระบบมาใน Server Box พร้อมใช้งาน
+                                        <p class="p-4">
+                                            <span class="">การเชื่อมต่อเป็นระบบ LAN or wifi(*by case):</span>
+                                            ติดตั้งง่าย Server Module box จะประกอบเป็นตู้สำเร็จรูปต่อสาย LAN เข้าระบบสามารถตั้งการใช้งานได้โดยผ่าน browser ไม่ต้องลงโปรแกรม
+                                        </p>
+
+                                        <p class="p-4 text-sm text-warning">
+                                            * รายการเพื่มเติมขอสงวนสิทธ์
+                                        </p>
+                                    </div>
+                                    <div name="product_tabContent" class="hidden"> </div>
+                                </div>
+                            </div>
+                            <a role="button" onclick="open_demo_pks_parking_dialog();" class="btn btn-warning btn-outline">
+                                <i class="fa-brands fa-quinscape fa-lg"></i>
+                                Demo App (สาธิต)[user:demo password:demo]
+                            </a>
+                            <h4 class="text-center ">Product <small>ข้อมูลระบบเบื่องต้น</small></h4>
+                            <div id="product_select_box_01" class="flex flex-col shadow-lg text-primary">
+                                <button onclick="product_select(1)" class=" btn btn-success">
+                                    <div class="flex flex-col">
+                                        <div class="text-lg">ข้อมูลระบบ</div>
+                                        การติดตั้ง
+                                    </div>
+                                </button>
+                                <button onclick="product_select(2)" class=" btn btn-ghost">
+                                    <div class="flex flex-col">
+                                        <div class="text-lg">ข้อมูลระบบ</div>
+                                        <div>การทำงานของระบบ</div>
+                                    </div>
+
+                                </button>
+                                <button onclick="product_select(3)" class=" btn btn-ghost">
+                                    <div class="flex flex-col">
+                                        <span class="text-lg">ข้อมูลระบบ</span>
+                                        <div>อุปกรณ์เสริม</div>
+                                    </div>
+                                </button>
+                                <button onclick="product_select(4)" class=" btn btn-ghost">
+                                    <div class="flex flex-col">
+                                        <span class="text-lg">Development</span>
+                                        ** ตามต้องการ **
+                                    </div>
+                                </button>
+                            </div>
+
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>฿xxx,xxx.00</h3>
+                                    <p>Ex Tax: ฿xxx,xxx.00</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa-solid fa-tags"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <a class="btn btn-primary btn-outline">
+                                    <i class="mr-2 fas fa-cart-plus fa-lg"></i>
+                                    ติดต่อสอบถาม
+                                </a>
+                                <a href="https://youtu.be/A8ekaSJBGtk" target="_blank" class="btn btn-success btn-outline">
+                                    <i class="fa-brands fa-youtube fa-lg"></i>
+                                    Video review
+                                </a>
+                            </div>
+                            <div class="mt-4">
+                                <a href="https://www.facebook.com/profile.php?id=61551897294718" target="_blank" class="text-blue-500">
+                                    <i class="fab fa-facebook-square "></i>
+                                </a>
+
+                                <a href="#" class="text-green-500">
+                                    <i class="fa-brands fa-line "></i>
+                                </a>
+                                <a href="https://www.youtube.com/channel/UC8QUzWR86e1i5E9wJhyxa6A" target="_blank" class="text-red-500">
+                                    <i class="fa-brands fa-youtube "></i>
+                                </a>
+                                <a href="https://github.com/pksofttech" target="_blank" class="text-teal-900">
+                                    <i class="fa-brands fa-github "></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 mt-4 border mockup-window">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% include '_side_menu_bar.html' %}
+    </div>
+
+    {% include '_footer.html' %}
+
+</body>
+{% include '_script.html' %}
+
+<script>
+    function show_info(msg) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: "success",
+            title: "Successful",
+            html: msg,
+            timer: 1000,
+            showConfirmButton: false,
+        });
+    }
+    toastr["info"]("ยินดีต้อนรับ QPKS สวัดดีค่ะ");
+
+    function product_select(id) {
+        const product_select_box_01 = document.getElementById("product_select_box_01");
+        const product_list = product_select_box_01.querySelectorAll("button")
+
+        for (let i = 0; i < product_list.length; i++) {
+            const e = product_list[i];
+
+            if (i == id - 1) {
+                e.classList.remove("btn-ghost");
+                e.classList.add("btn-success");
+            } else {
+                e.classList.add("btn-ghost");
+            }
+        }
+        const product_tabContent = document.getElementById("product_tabContent");
+        const product_tabContent_list = product_tabContent.querySelectorAll('[name="product_tabContent"]');
+        for (let i = 0; i < product_tabContent_list.length; i++) {
+            const e = product_tabContent_list[i];
+
+            if (i == id - 1) {
+                e.classList.remove("hidden");
+                e.classList.add("block");
+            } else {
+                e.classList.add("hidden");
+            }
+        }
+
+    }
+
+    function select_product_img(e) {
+        document.getElementById("product_image_preview").src = e.src;
+
+    }
+</script>
+
+</html>

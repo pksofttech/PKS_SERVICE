@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	{% include '_meta.html' %}
+</head>
+
+<body class="flex flex-col ">
+	<!-- **NOTE -   Modal_System_User-->
+	<dialog id="Modal_System_User" class=" modal">
+
+		<form method="dialog" id="form_system_user" class="modal-box">
+			<div class="grid gap-4 mb-4 sm:grid-cols-2">
+				<div>
+					<label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Login Name</label>
+					<input type="text" name="username" class="input_box_form" placeholder="login Name" required>
+
+				</div>
+
+				<div>
+					<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User Name</label>
+					<input type="text" name="name" class="input_box_form" placeholder="User Name">
+				</div>
+
+				<div>
+					<label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User password</label>
+					<input type="password" name="password" required class="input_box_form" placeholder="password">
+				</div>
+
+				<div class="text-center">
+					<img src="/static/dist/img/img_not_found.png" id="preview-img-of-item" class="w-24 h-24 p-1 mx-auto mb-2 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+						alt="ไม่มีรูป" />
+
+					<div class="inline-flex border rounded-lg">
+						<input type="file" class="w-full rounded-lg text_info" name="image_upload" accept="image/*" onchange="showPreview(event,'preview-img-of-item');" />
+					</div>
+				</div>
+
+				<div>
+					<label for="system_user_type_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">system_user_type</label>
+					<select id="system_user_type_id" name="system_user_type_id" required class="input_box_form">
+					</select>
+				</div>
+				<div class="sm:col-span-2">
+					<label for="remark" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remark</label>
+					<textarea name="remark" rows="4" class="input_box_form" placeholder="หมายเหตุ"></textarea>
+				</div>
+			</div>
+
+			<div class="flex justify-between modal-action">
+				<button type="submit" class="btn btn-primary" onclick="submit_form_item('form_system_user')">
+					<i class="fa fa-times-circle" aria-hidden="true"></i>
+					<span class="ml-2">OK</span>
+				</button>
+				<button class="btn btn-warning">Close</button>
+			</div>
+
+		</form>
+
+	</dialog>
+
+	<div class="drawer lg:drawer-open ">
+		<input id="side-drawer" type="checkbox" class="drawer-toggle" />
+		<div class="relative flex flex-col px-2 drawer-content">
+			{% include '_nav_bar.html' %}
+			<!-- Page content here -->
+			<div class="bg-base-200">
+
+				<div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+					<ul class="flex flex-wrap -mb-px text-sm font-medium text-center" data-tabs-toggle="#page_TabContent" role="tablist">
+
+						<li class="mr-2" role="presentation">
+							<button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+								id="config-tab" data-tabs-target="#config_tab_target" type="button" role="tab" aria-controls="dashboard" aria-selected="false">
+								<i class="fa-solid fa-xl fa-gears"></i> Config System</button>
+						</li>
+						<li class="mr-2" role="presentation">
+							<button class="inline-block p-4 border-b-2 rounded-t-lg" id=" system_user_tab" onclick="get_systems_user()" data-tabs-target="#system_user_tab_target"
+								type="button" role="tab" aria-controls="system_user_tab_content" aria-selected="false"><i class="fa-solid fa-xl fa-users-gear"></i> System
+								Users</button>
+						</li>
+
+					</ul>
+				</div>
+				<div id="page_TabContent">
+					<div class="hidden p-4 rounded-lg " id="config_tab_target" role="tabpanel" aria-labelledby="dashboard-tab">
+						<div class="">
+							<div class="max-w-screen-xl px-4 py-4 mx-auto text-center ">
+								<div class="max-w-screen-sm mx-auto mb-2">
+									<p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">หมวดการตั้งค่าระบบ</p>
+								</div>
+								<div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+									<div class="text-center text-gray-500 dark:text-gray-400">
+										<i class="py-8 mx-auto text-blue-500 fa-brands fa-quinscape fa-5x "></i>
+										<h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+											ข้อมูลกลุ่มบริการ
+										</h3>
+										<p>Q PKS</p>
+										<ul class="flex justify-center mt-4 space-x-4">
+											<li>
+												<a role="button" class="text-[#39569c] hover:text-gray-900 dark:hover:text-white">
+													<i class="fa-solid fa-xl fa-circle-info"></i>
+												</a>
+											</li>
+											<li>
+												<a role="button" href="/services" class="text-[#00acee] hover:text-gray-900 dark:hover:text-white">
+													<i class="fa-solid fa-sliders fa-xl"></i>
+												</a>
+											</li>
+
+										</ul>
+									</div>
+
+
+									<div class="text-center text-gray-500 dark:text-gray-400">
+										<i class="py-8 mx-auto text-blue-500 fa-5x fa-solid fa-tv"></i>
+										<h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+											จอแสดงข้อมูล
+										</h3>
+										<p>Q PKS</p>
+										<ul class="flex justify-center mt-4 space-x-4">
+											<li>
+												<a href="#" class="text-[#39569c] hover:text-gray-900 dark:hover:text-white">
+													<i class="fa-solid fa-xl fa-circle-info"></i>
+												</a>
+											</li>
+											<li>
+												<a href="/monitor_kiosk/?system_config=1
+												" class="text-[#00acee] hover:text-gray-900 dark:hover:text-white">
+													<i class="fa-solid fa-sliders fa-xl"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+
+									<div class="text-center text-gray-500 dark:text-gray-400">
+										<i class="py-8 mx-auto text-blue-500 fa-5x fa-solid fa-print"></i>
+										<h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+											เครื่องพิมพ์ Slip
+										</h3>
+										<p>Q PKS</p>
+										<ul class="flex justify-center mt-4 space-x-4">
+											<li>
+												<a href="#" class="text-[#39569c] hover:text-gray-900 dark:hover:text-white">
+													<i class="fa-solid fa-xl fa-circle-info"></i>
+												</a>
+											</li>
+											<li>
+												<a href="/printer_kiosk/?printer_kiosk_id=printer_kiosk01" class="text-[#00acee] hover:text-gray-900 dark:hover:text-white">
+													<i class="fa-solid fa-sliders fa-xl"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="hidden p-4 rounded-lg " id="system_user_tab_target" role="tabpanel" aria-labelledby="system_user_tab">
+						<div class="relative overflow-x-auto text-gray-500 shadow-md sm:rounded-lg ">
+							<table id="system_user_table" class="w-full display dark:text-gray-400">
+
+							</table>
+							<div class="p-4 mb-8 text-center">
+								<a role="button" id="btn_parking_lot_add_item" onclick="manager_system_user()" class="text-center dark:text-blue-500 hover:underline"><i
+										class="text-teal-500 fa-regular fa-square-plus"></i> สร้างผู้ใช้งาน</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		{% include '_side_menu_bar.html' %}
+	</div>
+
+	{% include '_footer.html' %}
+</body>
+{% include '_script.html' %}
+
+
+<script>
+	const API_SYSTEM_USER = "/api/systems_user/"
+	let current_system_user_id = 0;
+	async function get_systems_user() {
+		const data = await fetchApi(`${API_SYSTEM_USER}system_user_type`, "get", null, "json");
+		let html_system_user_type = "";
+		for (let i = 0; i < data.length; i++) {
+			const _s = data[i].System_User_Type;
+			const _temp = `<option value="${_s.id}">${_s.user_type}</option>`;
+			html_system_user_type += _temp;
+		}
+
+		document.getElementById('system_user_type_id').innerHTML = html_system_user_type;
+		const columns_table = [
+			{
+				data: "System_User.id",
+				title: "ID",
+				name: "ID",
+				render: function (data, type) {
+					return String(data).padStart(5, "0");
+				},
+			},
+			{
+				data: "System_User.id",
+				title: "จัดการ",
+				orderable: false,
+				render: function (data, type, row) {
+					return `<div class="inline-flex border border-blue-600 rounded-md shadow-sm" role="group">
+								<a class="btn_tool" onclick="manager_system_user(${data})"> <i class="fas fa-user-edit"></i></a>
+								<a class="btn_tool" onclick="remove_system_user(${data})"><i class="far fa-trash-alt"></i></a>
+							</div>`;
+				},
+			},
+			{
+				data: "System_User.pictureUrl",
+				title: "pictureUrl",
+				orderable: false,
+				render: function (data) {
+					if (data == "") {
+						return "Not Image"
+					}
+					return `<div class="image">
+								<img src="${data}" class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" alt="User Image">
+							</div>`;
+				}
+			},
+			{
+				data: "System_User.username",
+				title: "Login name",
+			},
+			{
+				data: "System_User.name",
+				title: "ชื่อสมาชิก",
+			},
+			{
+				data: "System_User.createDate",
+				title: "วันลงทะเบียน",
+				render: function (data) {
+					//let _d = moment(data);
+					//return _d.fromNow();
+					return moment(data);
+				}
+			},
+			{
+				data: "System_User.create_by",
+				title: "create_by",
+			},
+			{
+				data: "System_User.status",
+				title: "status",
+			},
+			{
+				data: "System_User_Type.user_type",
+				title: "user_type",
+			},
+			{
+				data: "System_User.remark",
+				title: "หมายเหตุ",
+				orderable: false,
+			},
+		];
+
+		//debug(columns_table)
+		headers = await get_headers();
+
+		let system_user_table = $("#system_user_table").DataTable({
+
+			//dom: "Blfip",
+			dom: '<"top"iB>rt<"bottom"flp><"clear">',
+			//dom: 'Plfrtip',
+			buttons: [
+				"csv",
+				'excel',
+				"print",
+				"colvis",
+			],
+			columnDefs: columnDefs,
+			destroy: true,
+			autoWidth: false,
+			pageLength: 10,
+			scrollCollapse: true,
+			scrollY: "50vh",
+			sScrollX: true,
+			//fixedColumns: true,
+			// "paging": false
+			// data: dataSet,
+			columns: columns_table,
+			order: [[0, "desc"]],
+			processing: true,
+			serverSide: true,
+			search: {
+				return: true,
+			},
+			ajax: {
+				headers: headers,
+				type: "GET",
+				url: `${API_SYSTEM_USER}datatable`,
+				data: function (d) {
+					d.table = "system_user_table";
+				},
+				error: function (xhr, textStatus, errorThrown) {
+					Swal.fire({
+						icon: "error",
+						title: "Successful",
+						text: "error "
+					})
+					//window.location.reload();
+				},
+			},
+		});
+
+
+	}
+	get_systems_user();
+	async function remove_system_user(id) {
+		if (!(await dialog_confirm())) return;
+
+		let _reply = await fetchApi(`${API_SYSTEM_USER}${id}`, "delete", null, "json");
+		//debug(_reply);
+		if (_reply.success == true) {
+			Swal.fire({
+				icon: "info",
+				title: "Successful",
+				html: _reply.msg,
+			}).then(() => {
+				window.location.reload();
+			});
+		} else {
+			debug(_reply)
+			toastMixin.fire({
+				title: JSON.stringify(_reply),
+				icon: "error",
+			});
+		}
+
+	}
+
+	async function submit_form_item(id_form) {
+		debug("submit_form_item");
+
+		const _from_e = document.getElementById(id_form);
+		if (_from_e == null) {
+			Swal.fire(
+				'Form data error',
+				id_form,
+				'error'
+			)
+		}
+		const _api_path = API_SYSTEM_USER;
+		//debug(_from_e.elements.length);
+		const formData = new FormData();
+		if (current_system_user_id > 0) {
+			formData.append("id", current_system_user_id);
+		}
+		for (let i = 0; i < _from_e.elements.length; i++) {
+			let _f_e = _from_e.elements[i];
+			if (_f_e.name != "") {
+				let k = _f_e.name;
+				let v = _f_e.value;
+
+				if (k == "image_upload" & v != "") {
+
+					formData.append(k, await dataURLtoFile(document.getElementById("preview-img-of-item").src, v));
+					debug("form is already uploaded file")
+					continue;
+				}
+				if (_f_e.name == "password" & _f_e.value == "*") continue;
+				formData.append(k, v);
+
+				debug("key :" + k + " : " + v);
+
+			}
+		}
+
+		//debug(formData)
+		let _reply = await fetchApi(_api_path, "post", formData, "json");
+		//debug(_reply);
+		if (!!_reply) {
+			if (_reply.success == true) {
+				Swal.fire({
+					icon: "info",
+					title: "Successful",
+					html: _reply.msg,
+				}).then(() => {
+					//window.location.reload();
+					get_systems_user();
+					//Modal_System_User.hideModal();
+				});
+			} else {
+				debug(_reply)
+				toastMixin.fire({
+					title: JSON.stringify(_reply),
+					icon: "error",
+				});
+			}
+		}
+	}
+
+	async function manager_system_user(id = 0) {
+		current_system_user_id = id;
+		if (id == 0) {
+			//document.getElementById("form-modal-title").innerText = "ADD MODE";
+		} else {
+			//document.getElementById("form-modal-title").innerText = "EDIT MODE ID :" + id;
+
+			let _datas = await fetchApi(`${API_SYSTEM_USER}?id=${id}`, "get", null, "json");
+			if (!!_datas) {
+				const _system_user = _datas.System_User;
+				if (_system_user.id) {
+					const _from_e = document.getElementById("form_system_user");
+					for (let i = 0; i < _from_e.elements.length; i++) {
+						let _f_e = _from_e.elements[i];
+
+						if (_f_e.name != "") {
+							if (_f_e.name == "image_upload") {
+								document.getElementById("preview-img-of-item").src = _system_user["pictureUrl"]
+								//debug(document.getElementById("preview-img-of-item").src)
+								continue;
+							}
+							if (_f_e.name == "password") {
+								_f_e.value = "*"
+								continue;
+							}
+
+							_f_e.value = _system_user[_f_e.name]
+						}
+
+					}
+				} else {
+					debug(_system_user)
+					toastMixin.fire({
+						title: JSON.stringify(_system_user),
+						icon: "error",
+					});
+					return;
+				}
+			}
+		}
+
+		Modal_System_User.showModal();
+
+	}
+	//get_systems_user();
+	//manager_system_user();
+</script>
+
+</html>
