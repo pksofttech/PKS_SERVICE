@@ -5,6 +5,9 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app.stdio import print_success, print_warning, time_now
 
+
+from app.service import mqtt_service
+
 # ? Setting router path
 from app.routes import api, websocket
 
@@ -13,10 +16,12 @@ async def lifespan(app_fastapi: FastAPI):
     """lifespan for start proseecss pre load"""
     print(app_fastapi)
     print_success(f"Server Start Time : {time_now()}")
+    await mqtt_service.startup()
     yield
     # Clean up the ML models and release the resources
     print_warning(f"Server shutdown Time : {time_now()}")
     print_success(f"Server Start Time : {time_now()}")
+    await mqtt_service.shutdown()
 
 
 app = FastAPI(

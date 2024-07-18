@@ -90,6 +90,7 @@ async def ep_proxy(
     """ep_post_strip"""
 
     # time.sleep(5)
+    error_msg = ""
     _now = time_now()
     api_key = strip_data.api_key
     payment_data = strip_data.data
@@ -152,7 +153,8 @@ async def ep_proxy(
                     print(data)
 
                 return {"success": True, "data": data, "ref": ref}
-
+        else:
+            error_msg = "amount not value"
     elif api == "payment_promptpay_status":
         with httpx.Client() as client:
             url_payment_intents = f"{stripe_url}/payment_intents"
@@ -185,4 +187,4 @@ async def ep_proxy(
                 print_debug(f"Payment status: {status}")
             return {"success": success, "data": status}
 
-    return {"success": success, "data": None}
+    return {"success": success, "data": None, "error": error_msg}
