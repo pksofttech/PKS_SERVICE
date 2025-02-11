@@ -1,13 +1,15 @@
 """Module view.py for public endpoints."""
 
-import os
+# import os
+from datetime import datetime, timedelta
 from typing import Union
 from fastapi import APIRouter, Depends, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
-from sqlalchemy.orm import Session
+
+# from sqlalchemy.orm import Session
 
 from app.stdio import print_error, time_now, print_debug
 from app.core import config
@@ -161,24 +163,120 @@ async def qr_strip_payment(api: str, strip_data: StripData):
                 print_debug("Payment was successful!")
                 # print(payment_intent)
                 success = True
-                qr_sn = strip_data.qr_sn
-                if not qr_sn:
-                    qr_sn = "ไม่ระบุชื่อ"
-                line_token = strip_data.line_token
-                if line_token:
-                    id = payment_intent.get("id")
-                    amount = int(payment_intent.get("amount")) * 0.01
-                    print_debug("line_token :" + line_token)
-                    await run_in_threadpool(
-                        send_line_notify,
-                        f"{qr_sn}\nGET-AMOUNT:{amount:0.2f}\n{id}",
-                        line_token,
-                    )
+                # qr_sn = strip_data.qr_sn
+                # if not qr_sn:
+                #     qr_sn = "ไม่ระบุชื่อ"
+                # line_token = strip_data.line_token
+                # if line_token:
+                #     id = payment_intent.get("id")
+                #     amount = int(payment_intent.get("amount")) * 0.01
+                #     print_debug("line_token :" + line_token)
+                #     await run_in_threadpool(
+                #         send_line_notify,
+                #         f"{qr_sn}\nGET-AMOUNT:{amount:0.2f}\n{id}",
+                #         line_token,
+                #     )
             else:
                 print_debug(f"Payment status: {status}")
             return {"success": success, "data": status}
 
     return {"success": success, "data": None, "error": error_msg}
+
+
+async def qr_beam_payment(api: str, strip_data: StripData):
+    """api_beam"""
+    api_key = strip_data.api_key
+    payment_data = strip_data.data
+
+    beam_user, beam_api_key = api_key.split("@")
+    if api == "qr_code":
+        amount = payment_data.get("amount")
+        _now_z = datetime.now() + timedelta(minutes=10)
+        expiresAt = _now_z.strftime("%Y-%m-%dT%H:%M:%S")
+        expiresAt = expiresAt.split(".")[0] + "Z"
+        amount = amount * 100
+        payload = {
+            "amount": amount,
+            "currency": "THB",
+            "paymentMethod": {
+                "paymentMethodType": "QR_PROMPT_PAY",
+                "qrPromptPay": {"expiresAt": expiresAt},
+            },
+            "referenceId": str(_now_z.timestamp()),
+            # "returnUrl": pay_success_url,
+        }
+        print_debug(payload)
+        try:
+            # """https://playground-partner-api.beamdata.co/api/v1/charges"""
+            url_beam_server_api = "https://api.beamcheckout.com/api/v1/charges"
+            headers = {"Content-Type": "application/json"}
+            auth = httpx.BasicAuth(beam_user, beam_api_key)
+            with httpx.Client(auth=auth) as client:
+                client.headers = headers
+                r = client.post(
+                    url_beam_server_api,
+                    json=payload,
+                )
+                rep_data = r.json()
+                print_debug(rep_data)
+                error_code = rep_data.get("code")
+                if error_code:
+                    return {
+                        "success": False,
+                        "error_code": error_code,
+                        "msg": rep_data.get("message"),
+                    }
+                chargeId = rep_data.get("chargeId")
+                if chargeId:
+                    ref = None
+                    data = (rep_data.get("encodedImage").get("rawData"),)
+                    ref = chargeId
+                    print(data)
+                    return {"success": True, "data": data, "ref": ref}
+                error_msg = "not chargeId"
+
+        except Exception as err:
+            print_error(str(err))
+            error_msg = str(err)
+
+    elif api == "payment_status":
+        # return {"success": success, "error": error_msg}
+        purchaseId = payment_data.get("id")
+        if purchaseId:
+            headers = {
+                # "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            }
+
+            auth = httpx.BasicAuth(beam_user, beam_api_key)
+            # https://api.beamcheckout.com/api/v1/charges/id--xxxx
+            url_beam_server_api = (
+                f"https://api.beamcheckout.com/api/v1/charges/{purchaseId}"
+            )
+            print_debug(url_beam_server_api)
+            if url_beam_server_api:
+                try:
+                    with httpx.Client(auth=auth) as client:
+                        client.headers = headers
+                        r = client.get(
+                            url_beam_server_api,
+                        )
+                        rep_data = r.json()
+                        print_debug(rep_data)
+                        status = rep_data.get("status")
+                        if status == "SUCCEEDED":
+                            success = True
+                            return {"success": success, "data": status}
+
+                        return {"success": False, "data": status}
+
+                except Exception as err:
+                    error_msg = str(err)
+            else:
+                success = False
+                error_msg = "not url_beam_server_api"
+
+    return {"success": success, "error": error_msg}
 
 
 @router.post("/strip/{api}")
