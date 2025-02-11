@@ -189,7 +189,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
     payment_data = strip_data.data
 
     beam_user, beam_api_key = api_key.split("@")
-    if api == "qr_code":
+    if api == "payment_promptpay":
         amount = payment_data.get("amount")
         _now_z = datetime.now() + timedelta(minutes=10)
         expiresAt = _now_z.strftime("%Y-%m-%dT%H:%M:%S")
@@ -239,7 +239,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
             print_error(str(err))
             error_msg = str(err)
 
-    elif api == "payment_status":
+    elif api == "payment_promptpay_status":
         # return {"success": success, "error": error_msg}
         purchaseId = payment_data.get("id")
         if purchaseId:
