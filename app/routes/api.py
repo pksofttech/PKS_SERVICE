@@ -82,19 +82,10 @@ class StripData(BaseModel):
     line_token: Union[str, None] = (None,)
 
 
-@router.post("/strip/{api}")
-async def ep_proxy(
-    strip_data: StripData,
-    api: str,
-):
-    """ep_post_strip"""
-
-    # time.sleep(5)
+async def qr_strip_payment(api: str, strip_data: StripData):
     error_msg = ""
-    _now = time_now()
     api_key = strip_data.api_key
     payment_data = strip_data.data
-    # print_debug(payment_data)
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/x-www-form-urlencoded",
@@ -188,3 +179,15 @@ async def ep_proxy(
             return {"success": success, "data": status}
 
     return {"success": success, "data": None, "error": error_msg}
+
+
+@router.post("/strip/{api}")
+async def ep_proxy(
+    strip_data: StripData,
+    api: str,
+):
+    """ep_post_payment"""
+    _now = time_now()
+    api_key = strip_data.api_key
+
+    await qr_strip_payment(api, strip_data)
