@@ -287,5 +287,7 @@ async def ep_proxy(
     """ep_post_payment"""
     _now = time_now()
     api_key = strip_data.api_key
+    if api_key.find("@") > 0:
+        return await qr_beam_payment(api, strip_data)
 
     await qr_strip_payment(api, strip_data)
