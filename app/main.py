@@ -25,7 +25,7 @@ async def lifespan(app_fastapi: FastAPI):
 
 
 app = FastAPI(
-    title="PKS-SERVICES",
+    title="PKS-SERVICES-API",
     version="0.0.2",
     description="Service For PKSOFTTECH.ORG SYSTEMS",
     lifespan=lifespan,
