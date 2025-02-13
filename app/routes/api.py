@@ -229,7 +229,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
                 chargeId = rep_data.get("chargeId")
                 if chargeId:
                     ref = None
-                    data = (rep_data.get("encodedImage").get("rawData"),)
+                    data = rep_data.get("encodedImage").get("rawData")
                     ref = chargeId
                     print(data)
                     return {"success": True, "data": data, "ref": ref}
