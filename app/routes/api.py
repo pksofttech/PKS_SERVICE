@@ -266,6 +266,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
                         status = rep_data.get("status")
                         if status == "SUCCEEDED":
                             success = True
+                            status = "succeeded"
                             return {"success": success, "data": status}
 
                         return {"success": False, "data": status}
