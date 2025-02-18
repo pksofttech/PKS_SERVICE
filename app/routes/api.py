@@ -291,4 +291,4 @@ async def ep_proxy(
     if api_key.find("@") > 0:
         return await qr_beam_payment(api, strip_data)
 
-    await qr_strip_payment(api, strip_data)
+    return await qr_strip_payment(api, strip_data)
