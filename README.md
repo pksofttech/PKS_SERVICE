@@ -17,3 +17,4 @@ git pull origin master
 npx tailwindcss -i ./main.css -o ./static/style.css --watch
 
 ON-LINE
+

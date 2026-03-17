@@ -2,7 +2,7 @@
 
 # import os
 from datetime import datetime, timedelta
-from typing import Union
+from typing import Optional
 from fastapi import APIRouter, Depends, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.templating import Jinja2Templates
@@ -73,15 +73,13 @@ def send_line_notify(message, token):
 
 class StripData(BaseModel):
     api_key: str
-    data: dict = (
-        {
-            "amount": 10,
-            "type": "promptpay",
-            "billing_details[email]": "pksofttecg@gmail.com",
-        },
-    )
-    qr_sn: Union[str, None] = (None,)
-    line_token: Union[str, None] = (None,)
+    data: dict = {
+        "amount": 10,
+        "type": "promptpay",
+        "billing_details[email]": "pksofttecg@gmail.com",
+    }
+    qr_sn: Optional[str] = None  # แนะนำให้ใส่ = None สำหรับ Optional
+    line_token: Optional[str] = None
 
 
 async def qr_strip_payment(api: str, strip_data: StripData):
@@ -209,7 +207,10 @@ async def qr_beam_payment(api: str, strip_data: StripData):
         try:
             # """https://playground-partner-api.beamdata.co/api/v1/charges"""
             url_beam_server_api = "https://api.beamcheckout.com/api/v1/charges"
-            headers = {"Content-Type": "application/json"}
+            headers = {
+                "Content-Type": "application/json",
+                "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
+            }
             auth = httpx.BasicAuth(beam_user, beam_api_key)
             with httpx.Client(auth=auth) as client:
                 client.headers = headers
@@ -244,8 +245,8 @@ async def qr_beam_payment(api: str, strip_data: StripData):
         purchaseId = payment_data.get("id")
         if purchaseId:
             headers = {
-                # "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
+                "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
             }
 
             auth = httpx.BasicAuth(beam_user, beam_api_key)
