@@ -183,7 +183,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
     """api_beam"""
     api_key = strip_data.api_key
     payment_data = strip_data.data
-
+    success = False
     beam_user, beam_api_key = api_key.split("@")
     is_beam_x_header = True
     if beam_user.startswith("&"):
@@ -276,6 +276,8 @@ async def qr_beam_payment(api: str, strip_data: StripData):
                 success = False
                 error_msg = "not url_beam_server_api"
 
+    else:
+        error_msg = "not api"
     return {"success": success, "error": error_msg}
 
 
