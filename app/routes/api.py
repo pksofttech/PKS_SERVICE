@@ -186,6 +186,15 @@ async def qr_beam_payment(api: str, strip_data: StripData):
 
     beam_user, beam_api_key = api_key.split("@")
     is_beam_x_header = True
+    if beam_user.startswith("&"):
+        beam_user = beam_user[1:]
+        is_beam_x_header = False
+
+    headers = {
+        "Content-Type": "application/json",
+    }
+    if is_beam_x_header:
+        headers["X-Beam-Partner-ID"] = "pnr_2uIiuWQajUeO06RujjxYiILcAsL"
     if api == "payment_promptpay":
         amount = payment_data.get("amount")
         _now_z = datetime.now() + timedelta(minutes=10)
@@ -206,10 +215,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
         try:
             # """https://playground-partner-api.beamdata.co/api/v1/charges"""
             url_beam_server_api = "https://api.beamcheckout.com/api/v1/charges"
-            headers = {
-                "Content-Type": "application/json",
-                # "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
-            }
+
             auth = httpx.BasicAuth(beam_user, beam_api_key)
             with httpx.Client(auth=auth) as client:
                 client.headers = headers
@@ -243,11 +249,6 @@ async def qr_beam_payment(api: str, strip_data: StripData):
         # return {"success": success, "error": error_msg}
         purchaseId = payment_data.get("id")
         if purchaseId:
-            headers = {
-                "Content-Type": "application/json",
-                # "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
-            }
-
             auth = httpx.BasicAuth(beam_user, beam_api_key)
             # https://api.beamcheckout.com/api/v1/charges/id--xxxx
             url_beam_server_api = f"https://api.beamcheckout.com/api/v1/charges/{purchaseId}"
