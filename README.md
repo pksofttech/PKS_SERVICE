@@ -66,7 +66,6 @@ GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_MODEL=gemini-1.5-flash
 
 # JWT (ถ้าต้องการ override ค่า default)
-API_SECRET_KEY=your_secret_key
 ```
 
 ---
@@ -169,19 +168,19 @@ PKS_SERVICE/
 
 ### Public APIs (`app/routes/api.py`)
 
-| Method | Endpoint           | Description                              |
-| ------ | ------------------ | ---------------------------------------- |
-| GET    | `/`                | Redirect ไปยัง `/docs`                   |
-| GET    | `/ping`            | Health check (returns current datetime)  |
-| GET    | `/page_404`        | หน้า 404 (Jinja2 template)               |
-| POST   | `/line/notify`     | ส่งแจ้งเตือนผ่าน LINE Notify             |
-| POST   | `/stripe/charge`   | สร้างรายการชำระเงินผ่าน Stripe (PromptPay)|
+| Method | Endpoint           | Description                                                       |
+| ------ | ------------------ | ----------------------------------------------------------------- |
+| GET    | `/`              | Redirect ไปยัง`/docs`                                      |
+| GET    | `/ping`          | Health check (returns current datetime)                           |
+| GET    | `/page_404`      | หน้า 404 (Jinja2 template)                                    |
+| POST   | `/line/notify`   | ส่งแจ้งเตือนผ่าน LINE Notify                      |
+| POST   | `/stripe/charge` | สร้างรายการชำระเงินผ่าน Stripe (PromptPay) |
 
 ### LPR Service (`app/routes/api_lpr_service.py`)
 
-| Method | Endpoint           | Description                                |
-| ------ | ------------------ | ------------------------------------------ |
-| POST   | `/lpr/lpr_read_plate` | อ่านป้ายทะเบียนจากภาพ (image upload)     |
+| Method | Endpoint                | Description                                               |
+| ------ | ----------------------- | --------------------------------------------------------- |
+| POST   | `/lpr/lpr_read_plate` | อ่านป้ายทะเบียนจากภาพ (image upload) |
 
 - รองรับไฟล์ภาพสูงสุด **5 MB**
 - ใช้ **PaddleOCR** (ภาษาไทย) และ **Gemini Vision API**
@@ -189,9 +188,9 @@ PKS_SERVICE/
 
 ### WebSocket (`app/routes/websocket.py`)
 
-| Endpoint | Description                                              |
-| -------- | -------------------------------------------------------- |
-| `/ws`    | WebSocket connection สำหรับ broadcast / targeted notify |
+| Endpoint | Description                                                   |
+| -------- | ------------------------------------------------------------- |
+| `/ws`  | WebSocket connection สำหรับ broadcast / targeted notify |
 
 ### MQTT Service (`app/service/mqtt_service.py`)
 
@@ -222,21 +221,21 @@ IMAGE_MAX_SIZE = (200, 200)
 
 ## 📦 Tech Stack
 
-| Layer          | Technology                                |
-| -------------- | ----------------------------------------- |
-| Web Framework  | FastAPI 0.139 + Starlette 0.46            |
-| ASGI Server    | Uvicorn 0.50                              |
-| Validation     | Pydantic 2.x                              |
-| ORM / Models   | SQLModel 0.0.39 + SQLAlchemy              |
-| Auth           | PyJWT + passlib[bcrypt]                   |
-| HTTP Client    | httpx 0.28                                |
-| MQTT           | paho-mqtt + APScheduler                   |
-| WebSocket      | FastAPI native WebSocket                  |
-| Image / OCR    | Pillow + PaddleOCR (paddlepaddle)         |
-| AI Vision      | Google Gemini (via REST)                  |
-| Templates      | Jinja2                                    |
-| CSS            | Tailwind CSS                              |
-| Container      | Docker (python:3.11-slim)                 |
+| Layer         | Technology                        |
+| ------------- | --------------------------------- |
+| Web Framework | FastAPI 0.139 + Starlette 0.46    |
+| ASGI Server   | Uvicorn 0.50                      |
+| Validation    | Pydantic 2.x                      |
+| ORM / Models  | SQLModel 0.0.39 + SQLAlchemy      |
+| Auth          | PyJWT + passlib[bcrypt]           |
+| HTTP Client   | httpx 0.28                        |
+| MQTT          | paho-mqtt + APScheduler           |
+| WebSocket     | FastAPI native WebSocket          |
+| Image / OCR   | Pillow + PaddleOCR (paddlepaddle) |
+| AI Vision     | Google Gemini (via REST)          |
+| Templates     | Jinja2                            |
+| CSS           | Tailwind CSS                      |
+| Container     | Docker (python:3.11-slim)         |
 
 ---
 
