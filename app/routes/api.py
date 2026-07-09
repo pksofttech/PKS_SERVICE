@@ -2,18 +2,17 @@
 
 # import os
 from datetime import datetime, timedelta
-from typing import Optional
-from fastapi import APIRouter, Depends, Request
-from fastapi.concurrency import run_in_threadpool
-from fastapi.templating import Jinja2Templates
+
+import httpx
+from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
-# from sqlalchemy.orm import Session
-
-from app.stdio import print_error, time_now, print_debug
 from app.core import config
-import httpx
+
+# from sqlalchemy.orm import Session
+from app.stdio import print_debug, print_error, time_now
 
 DIR_PATH = config.DIR_PATH
 templates = Jinja2Templates(directory="templates")
@@ -77,9 +76,10 @@ class StripData(BaseModel):
         "amount": 10,
         "type": "promptpay",
         "billing_details[email]": "pksofttecg@gmail.com",
+        "id": "000",
     }
-    qr_sn: Optional[str] = None  # แนะนำให้ใส่ = None สำหรับ Optional
-    line_token: Optional[str] = None
+    # qr_sn: Optional[str] = None  # แนะนำให้ใส่ = None สำหรับ Optional
+    # line_token: Optional[str] = None
 
 
 async def qr_strip_payment(api: str, strip_data: StripData):
@@ -102,9 +102,7 @@ async def qr_strip_payment(api: str, strip_data: StripData):
                 client.headers = headers
                 data = {
                     "type": payment_data.get("type"),
-                    "billing_details[email]": payment_data.get(
-                        "billing_details[email]"
-                    ),
+                    "billing_details[email]": payment_data.get("billing_details[email]"),
                 }
                 r = client.post(url_payment_methods, data=data)
                 payment_methods = r.json()
@@ -131,7 +129,7 @@ async def qr_strip_payment(api: str, strip_data: StripData):
                     return {"success": False, "error": payment_intent.get("error")}
 
                 r = client.post(
-                    f"{url_payment_intents}/{payment_intent.get("id")}/confirm",
+                    f"{url_payment_intents}/{payment_intent.get('id')}/confirm",
                 )
                 payment_intent = r.json()
                 # print(payment_intent)
@@ -151,7 +149,7 @@ async def qr_strip_payment(api: str, strip_data: StripData):
             url_payment_intents = f"{stripe_url}/payment_intents"
             client.headers = headers
             r = client.get(
-                f"{url_payment_intents}/{payment_data.get("id")}",
+                f"{url_payment_intents}/{payment_data.get('id')}",
             )
             payment_intent = r.json()
             # print(payment_intent)
@@ -187,6 +185,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
     payment_data = strip_data.data
 
     beam_user, beam_api_key = api_key.split("@")
+    is_beam_x_header = True
     if api == "payment_promptpay":
         amount = payment_data.get("amount")
         _now_z = datetime.now() + timedelta(minutes=10)
@@ -209,7 +208,7 @@ async def qr_beam_payment(api: str, strip_data: StripData):
             url_beam_server_api = "https://api.beamcheckout.com/api/v1/charges"
             headers = {
                 "Content-Type": "application/json",
-                "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
+                # "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
             }
             auth = httpx.BasicAuth(beam_user, beam_api_key)
             with httpx.Client(auth=auth) as client:
@@ -246,14 +245,12 @@ async def qr_beam_payment(api: str, strip_data: StripData):
         if purchaseId:
             headers = {
                 "Content-Type": "application/json",
-                "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
+                # "X-Beam-Partner-ID": "pnr_2uIiuWQajUeO06RujjxYiILcAsL",
             }
 
             auth = httpx.BasicAuth(beam_user, beam_api_key)
             # https://api.beamcheckout.com/api/v1/charges/id--xxxx
-            url_beam_server_api = (
-                f"https://api.beamcheckout.com/api/v1/charges/{purchaseId}"
-            )
+            url_beam_server_api = f"https://api.beamcheckout.com/api/v1/charges/{purchaseId}"
             print_debug(url_beam_server_api)
             if url_beam_server_api:
                 try:
@@ -283,11 +280,16 @@ async def qr_beam_payment(api: str, strip_data: StripData):
 
 @router.post("/strip/{api}")
 async def ep_proxy(
-    strip_data: StripData,
+    request: Request,
+    # strip_data: StripData,
     api: str,
 ):
     """ep_post_payment"""
     _now = time_now()
+    payload = await request.json()
+    print_debug(payload)
+    strip_data = StripData(api_key=payload.get("api_key"), data=payload.get("data"))
+    print_debug(strip_data)
     api_key = strip_data.api_key
     if api_key.find("@") > 0:
         return await qr_beam_payment(api, strip_data)

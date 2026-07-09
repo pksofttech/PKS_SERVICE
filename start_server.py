@@ -1,5 +1,6 @@
-import uvicorn
 import logging
+
+import uvicorn
 
 DEBUG = True
 LOGGING_LEVEL = logging.INFO

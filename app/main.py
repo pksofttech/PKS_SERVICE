@@ -3,13 +3,10 @@
 from fastapi import FastAPI, Request, staticfiles
 from starlette.middleware.cors import CORSMiddleware
 
-from app.stdio import print_success, print_warning, time_now
-
-
-from app.service import mqtt_service
-
 # ? Setting router path
-from app.routes import api, websocket
+from app.routes import api, api_lpr_service, websocket
+from app.service import mqtt_service
+from app.stdio import print_success, print_warning, time_now
 
 
 async def lifespan(app_fastapi: FastAPI):
@@ -52,12 +49,13 @@ async def middle_process_time(request: Request, call_next):
     response = await call_next(request)
     process_time = time_now() - start_time
     # response.headers["Process-Time"] = str(process_time)
-    print_success(f"Process time :{process_time.microseconds/1000} ms")
+    print_success(f"Process time :{process_time.microseconds / 1000} ms")
     return response
 
 
 app.include_router(websocket.router)
 app.include_router(api.router)
+app.include_router(api_lpr_service.router)
 
 
 # @app.exception_handler(HTTPException)

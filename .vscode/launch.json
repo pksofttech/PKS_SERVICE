@@ -1,12 +1,13 @@
 {
     "configurations": [
         {
-            "name": "Fastapi",
-            "type": "python",
+            "name": "Fastapi-Debug",
+            "type": "debugpy",
             "request": "launch",
             "program": "start_server.py",
             "console": "integratedTerminal",
-            "justMyCode": true
+            "justMyCode": true,
+            "python": "${workspaceFolder}/.venv/bin/python"
         }
     ]
 }
