@@ -38,6 +38,24 @@ class LPRResponseSchema(BaseModel):
     confidence_score: float = Field(ge=0.0, le=1.0, description="คะแนนความมั่นใจในการอ่านค่าของโมเดล 0.0 ถึง 1.0")
 
 
+class IDCardResponseSchema(BaseModel):
+    id_number: str | None = Field(
+        default=None, description="เลขประจำตัวประชาชน 13 หลัก หากอ่านไม่ออกหรือไม่มีให้ใส่ null"
+    )
+    thai_name: str | None = Field(
+        default=None, description="ชื่อและนามสกุลภาษาไทย เช่น นายสมชาย รักดี หากอ่านไม่ออกหรือไม่มีให้ใส่ null"
+    )
+    english_name: str | None = Field(
+        default=None, description="ชื่อและนามสกุลภาษาอังกฤษ เช่น Mr. Somchai Rakdee หากอ่านไม่ออกหรือไม่มีให้ใส่ null"
+    )
+    license_number: str | None = Field(
+        default=None, description="เลขที่ใบอนุญาตขับรถ/ขับขี่ (ถ้ามี) หากอ่านไม่ออกหรือไม่มีให้ใส่ null"
+    )
+    expiry_date: str | None = Field(
+        default=None, description="วันสิ้นอายุหรือวันหมดอายุของบัตร หากอ่านไม่ออกหรือไม่มีให้ใส่ null"
+    )
+
+
 @router.post("/lpr_read_plate")
 async def ep_lpr_read_plate(file: UploadFile = File(...)):
     """Read LPR plate using Gemini 1.5 Flash via Direct HTTP REST API."""
@@ -247,8 +265,8 @@ def extract_id_card_info(texts: list[str]) -> dict:
     return info
 
 
-@router.post("/ocr_id_card")
-async def ep_ocr_id_card(file: UploadFile = File(...), use_crop: bool = True, fallback: bool = True):
+@router.post("/ocr_id_card_paddle")
+async def ep_ocr_id_card_paddle(file: UploadFile = File(...), use_crop: bool = True, fallback: bool = True):
     """Perform OCR on ID card using PaddleOCR.
     If use_crop is True, crops the ID number and Name regions for a 2x+ speedup.
     If fallback is True, falls back to full-image OCR if cropped regions do not yield a citizen ID.
@@ -324,4 +342,163 @@ async def ep_ocr_id_card(file: UploadFile = File(...), use_crop: bool = True, fa
 
     except Exception as e:
         print_error(f"OCR ID Card Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"OCR ID Card Processing Error: {str(e)}")
+
+
+@router.post("/ocr_id_card")
+async def ep_ocr_id_card(file: UploadFile = File(...), use_crop: bool = True, fallback: bool = True):
+    """Perform OCR on ID card or Driver's License using Gemini 1.5 Flash via Direct HTTP REST API."""
+
+    _now = time_now()
+
+    if not file.content_type or not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="File provided is not an image.")
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="GEMINI_API_KEY is not configured in .env")
+
+    try:
+        image_bytes = await file.read()
+
+        if not image_bytes:
+            raise HTTPException(status_code=400, detail="Uploaded image is empty.")
+
+        if len(image_bytes) > MAX_FILE_SIZE:
+            raise HTTPException(status_code=413, detail="Image file is too large. Maximum size is 5 MB.")
+
+        base64_image = base64.b64encode(image_bytes).decode("utf-8")
+
+        model_name = os.getenv("GEMINI_MODEL") or "gemini-1.5-flash"
+        url = (
+            "https://generativelanguage.googleapis.com/v1beta/"
+            f"models/{model_name}:generateContent?key={api_key}"
+        )
+
+        payload = {
+            "contents": [
+                {
+                    "parts": [
+                        {
+                            "inlineData": {
+                                "mimeType": file.content_type,
+                                "data": base64_image,
+                            }
+                        },
+                        {
+                            "text": (
+                                "Extract information from this Thai ID card or Driver's license. "
+                                "Return null for fields that are unreadable or missing. "
+                                "Do not guess names or digits if they are not clear."
+                            )
+                        },
+                    ]
+                }
+            ],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "responseSchema": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "id_number": {
+                            "type": "STRING",
+                            "description": "เลขประจำตัวประชาชน 13 หลัก หากอ่านไม่ออกหรือไม่มีให้ใส่ null",
+                            "nullable": True,
+                        },
+                        "thai_name": {
+                            "type": "STRING",
+                            "description": "ชื่อและนามสกุลภาษาไทย เช่น นายสมชาย รักดี หากอ่านไม่ออกหรือไม่มีให้ใส่ null",
+                            "nullable": True,
+                        },
+                        "english_name": {
+                            "type": "STRING",
+                            "description": "ชื่อและนามสกุลภาษาอังกฤษ เช่น Mr. Somchai Rakdee หากอ่านไม่ออกหรือไม่มีให้ใส่ null",
+                            "nullable": True,
+                        },
+                        "license_number": {
+                            "type": "STRING",
+                            "description": "เลขที่ใบอนุญาตขับรถ/ขับขี่ (ถ้ามี) หากอ่านไม่ออกหรือไม่มีให้ใส่ null",
+                            "nullable": True,
+                        },
+                        "expiry_date": {
+                            "type": "STRING",
+                            "description": "วันสิ้นอายุหรือวันหมดอายุของบัตร หากอ่านไม่ออกหรือไม่มีให้ใส่ null",
+                            "nullable": True,
+                        },
+                    },
+                    "required": [
+                        "id_number",
+                        "thai_name",
+                        "english_name",
+                        "license_number",
+                        "expiry_date",
+                    ],
+                },
+                "temperature": 0.0,
+            },
+            "systemInstruction": {
+                "parts": [
+                    {
+                        "text": (
+                            "You are a precise Thai ID card and Driver's license OCR system. "
+                            "Analyze the image carefully. "
+                            "Do not guess unreadable characters. "
+                            "Output only valid JSON according to the schema. "
+                            "Do not include markdown or explanation."
+                        )
+                    }
+                ]
+            },
+        }
+
+        async with httpx.AsyncClient(timeout=30.0) as httpx_client:
+            res = await httpx_client.post(url, json=payload)
+
+        if res.status_code != 200:
+            print_error(f"Gemini API Error Response: {res.text}")
+            raise HTTPException(status_code=502, detail="Gemini remote API error")
+
+        response_json = res.json()
+
+        try:
+            text_response = response_json["candidates"][0]["content"]["parts"][0]["text"]
+        except (KeyError, IndexError, TypeError):
+            print_error(f"Unexpected Gemini Response: {response_json}")
+            raise HTTPException(status_code=502, detail="Unexpected Gemini response format")
+
+        try:
+            result_data = json.loads(text_response)
+        except json.JSONDecodeError:
+            print_error(f"Invalid JSON from Gemini: {text_response}")
+            raise HTTPException(status_code=502, detail="Gemini returned invalid JSON")
+
+        try:
+            parsed = IDCardResponseSchema(**result_data)
+        except ValidationError as e:
+            print_error(f"Gemini response validation error: {e}")
+            raise HTTPException(status_code=502, detail="Gemini response schema validation failed")
+
+        return {
+            "status": "success",
+            "timestamp": _now.isoformat(),
+            "data": {
+                "raw_texts": [],
+                "raw_scores": [],
+                "extracted_info": parsed.model_dump(),
+            },
+        }
+
+    except HTTPException:
+        raise
+
+    except httpx.TimeoutException:
+        print_error("Gemini API timeout")
+        raise HTTPException(status_code=504, detail="Gemini API timeout")
+
+    except httpx.RequestError as e:
+        print_error(f"Gemini request error: {str(e)}")
+        raise HTTPException(status_code=502, detail="Cannot connect to Gemini API")
+
+    except Exception as e:
+        print_error(f"OCR ID Card Direct HTTP Error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"OCR ID Card Processing Error: {str(e)}")
